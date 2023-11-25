@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/index.css" rel="stylesheet">
+  <link rel="icon" href="favicon.svg" />
+  <title>Arihant Bedagkar</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <div id="project-modal"></div>
+  <div id="menu-dropdown"></div>
+  <script>
+    reloadText = () => {
+      var div = document.getElementById('title-text-animated');
+      divHtml = div.innerHTML;
+      div.innerHTML = divHtml;
+    }
+
+    window.onload = () => {
+      if (document.getElementById('title-text-animated')) setInterval(reloadText, 5200);
+    };
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

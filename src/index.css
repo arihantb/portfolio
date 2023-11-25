@@ -1,0 +1,159 @@
+@import"https://unpkg.com/open-props/easings.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'San Francisco Pro';
+	src: url('./assets/fonts/San-Francisco-Pro.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'San Francisco Pro-Bold';
+	font-weight: 700;
+	src: url('./assets/fonts/San-Francisco-Pro.ttf') format('truetype');
+}
+
+.flip-text {
+	line-height: normal;
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
+	vertical-align: top;
+}
+
+.flip-text::before,
+.flip-text::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	left: 0;
+}
+
+.flip-text::after {
+	content: attr(data-replace);
+	height: 100%;
+	top: 0;
+	transform-origin: 100% 50%;
+	transform: translate3d(0, 100%, 0);
+	transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+	color: #78716c;
+}
+
+.flip-text:hover::after {
+	transform: translate3d(0, 0, 0);
+}
+
+.flip-text p {
+	display: inline-block;
+	transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.flip-text:hover p {
+	transform: translate3d(0, -100%, 0);
+}
+
+.sun-and-moon>:is(.moon, .sun, .sun-beams) {
+	transform-origin: center center
+}
+
+.sun-and-moon>:is(.moon, .sun) {
+	fill: var(--icon-fill);
+}
+
+.theme-toggle:is(:hover, :focus-visible)>.sun-and-moon>:is(.moon, .sun) {
+	fill: var(--icon-fill-hover);
+}
+
+.sun-and-moon>.sun-beams {
+	stroke: var(--icon-fill);
+	stroke-width: 2px
+}
+
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon>.sun-beams {
+	stroke: var(--icon-fill-hover);
+}
+
+[data-theme="dark"] .sun-and-moon>.sun {
+	transform: scale(1.75)
+}
+
+[data-theme="dark"] .sun-and-moon>.sun-beams {
+	opacity: 0
+}
+
+[data-theme="dark"] .sun-and-moon>.moon>circle {
+	transform: translate(-7px)
+}
+
+@supports (cx: 1) {
+	[data-theme="dark"] .sun-and-moon>.moon>circle {
+		transform: translate(0);
+		cx: 17
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.sun-and-moon>.sun {
+		transition: transform .5s var(--ease-elastic-3)
+	}
+
+	.sun-and-moon>.sun-beams {
+		transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3)
+	}
+
+	.sun-and-moon .moon>circle {
+		transition: transform .25s var(--ease-out-5)
+	}
+
+	@supports (cx: 1) {
+		.sun-and-moon .moon>circle {
+			transition: cx .25s var(--ease-out-5)
+		}
+	}
+
+	[data-theme="dark"] .sun-and-moon>.sun {
+		transform: scale(1.75);
+		transition-timing-function: var(--ease-3);
+		transition-duration: .25s
+	}
+
+	[data-theme="dark"] .sun-and-moon>.sun-beams {
+		transform: rotate(-25deg);
+		transition-duration: .15s
+	}
+
+	[data-theme="dark"] .sun-and-moon>.moon>circle {
+		transition-delay: .25s;
+		transition-duration: .5s
+	}
+}
+
+@keyframes textColorAnimation {
+	from {
+		color: #d6d3d1;
+	}
+
+	to {
+		color: #78716c;
+	}
+}
+
+.theme-toggle>svg {
+	inline-size: 100%;
+	block-size: 100%;
+	stroke-linecap: round;
+}
+
+.markdown-body {
+	background-color: transparent !important;
+	font-family: 'San Francisco Pro', 'sans-serif' !important;
+	font-size: 18px !important;
+}
+
+.markdown-body>h2 {
+	font-size: 30px !important;
+	border-bottom: none !important;
+}
